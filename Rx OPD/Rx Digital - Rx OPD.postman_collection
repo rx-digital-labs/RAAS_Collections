@@ -1,0 +1,6049 @@
+{
+	"info": {
+		"_postman_id": "17026164-653d-4fca-8546-b2e0338310a2",
+		"name": "Rx Digital : Rx OPD Service",
+		"description": "<h1>API Reference Guide</h1>\n\n<b>RxDigital</b> APIs are completely RESTful and all our responses are returned in JSON.\n\nYou can use Rx Digital APIs in two modes, Test and Live. The API key is different for each mode. Know about <b>generating api keys</b>.\n\n<h2>API Authentication</h2>\nAll <b>RxDigital</b> APIs are authenticated using Basic Auth. Basic auth requires the following:\n\n * [YOUR_KEY_ID]\n * [YOUR_KEY_SECRET]\n\nBasic auth expects an Authorization header for each request in the Basic base64token format. Here, base64token is a base64 encoded string of YOUR_KEY_ID:YOUR_KEY_SECRET.\n\n<h4>Watch Out!</h4>\nThe Authorization header value should strictly adhere to the format mentioned above. Invalid formats will result in authentication failures.\n\n<h2>Generate API Keys</h2>\n\n1. Log into your Dashboard with appropriate credentials.\n2. Select the mode (Test or Live) for which you want to generate the API key.\n3. Navigate to Settings → API Keys → Generate Key to generate key for the selected mode.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Rx OPD - OPD Management Services",
+			"item": [
+				{
+					"name": "API Gateway",
+					"request": {
+						"method": "LINK",
+						"header": [],
+						"url": {
+							"raw": "https://rx-opd.herokuapp.com/",
+							"protocol": "https",
+							"host": [
+								"rx-opd",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "The RxOPD API Gateway URL is https://rx-opd.herokuapp.com/. You need to include this before each API endpoint to make API calls."
+					},
+					"response": []
+				}
+			],
+			"description": "Rx OPD Provides a number of RESTful APIs which can help in setting up Virtual Clinic in matter of minutes."
+		},
+		{
+			"name": "Hospital",
+			"item": [
+				{
+					"name": "Hospital: Register Hospital/Centre/Clinic",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "9bb3f93060ea0ef1f7d54598",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_5f7a87bf4752",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hosp_name\": \"Test Hospital2\",\r\n    \"hosp_accreditation_by\": \"NABH\",\r\n    \"hosp_registration_no\":\"TEST12345\",\r\n    \"email\": \"demo@rxdigital.io\",\r\n    \"country\": \"India\",\r\n    \"city\": \"Chennai\",\r\n    \"beds_count\": \"100\",\r\n    \"phone\": \"999999999\",\r\n    \"address\": \"Some Address\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/hospital",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hospital"
+							]
+						},
+						"description": "Use this endpoint to create or register a Hospital. One Hospital Admin can create multiple Hospitals/Clinic/Care Centers using the endpoint. However, each Hospital/Clinic/Care Center requires unique *Accreditation* and *Registration No*."
+					},
+					"response": [
+						{
+							"name": "Register Hospital/Centre/Clinic : Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"hosp_name\": \"DEF Hospital\",\r\n    \"hosp_accreditation_by\": \"NABH\",\r\n    \"hosp_registration_no\":\"SAME_REG_NO123\",\r\n    \"email\": \"demo.mail@hospital.com\",\r\n    \"country\": \"India\",\r\n    \"city\": \"Gurugram\",\r\n    \"beds_count\": \"100\",\r\n    \"phone\": \"999999999\",\r\n    \"address\": \"Some Address\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/hospital",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Sep 2021 14:19:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Hospital with Registration No. 'SAME_REG_NO123' exists already.\"\n}"
+						},
+						{
+							"name": "Register Hospital/Centre/Clinic: Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"hosp_name\": \"DEF Hospital\",\r\n    \"hosp_accreditation_by\": \"NABH\",\r\n    \"hosp_registration_no\":\"DEMOREG1234\",\r\n    \"email\": \"some.mail@hospital.com\",\r\n    \"country\": \"India\",\r\n    \"city\": \"Gurugram\",\r\n    \"beds_count\": \"100\",\r\n    \"phone\": \"999999999\",\r\n    \"address\": \"Some Address\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/hospital",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Sep 2021 14:22:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "66"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Hospital or Clinic profile is succesfully created.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Hospital: List Registered Hospitals",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "99ff82d55fd66a9c15c35f87",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_442238a98b22",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/hospital",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hospital"
+							]
+						},
+						"description": "Use this endpoint to fetch list of all registered hospitals. The response includes hos_id, which might be used as parameter for some other endpoints like Register Doctor."
+					},
+					"response": [
+						{
+							"name": "List Registered Hospitals: Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/hospital",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Sep 2021 14:30:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "323"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Registered Institutes\": [\n        {\n            \"hosp_accreditation_by\": \"NABH\",\n            \"hosp_name\": \"DEF Hospital\",\n            \"hos_id\": \"54d1ac58-8b9c-492a-a0bbb-eacde795\",\n            \"hosp_registration_no\": \"DEMOREG1234\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Hospital: Update Hospital Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "9bb3f93060ea0ef1f7d54598",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_5f7a87bf4752",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hosp_name\": \"Test Hospital1\",\r\n    \"hosp_accreditation_by\": \"NABH\",\r\n    \"hosp_registration_no\":\"TESTMODE1\",\r\n    \"email\": \"demo1@rxdigital.io\",\r\n    \"country\": \"India\",\r\n    \"city\": \"Gurugram\",\r\n    \"beds_count\": \"200\",\r\n    \"phone\": \"999999999\",\r\n    \"address\": \"Some Address at Gurugram\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/hospital",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hospital"
+							]
+						},
+						"description": "Use this endpoint to update an existing Hospital Profile. The API uses Hospital Accreditation and Registration No. to find hospital and update records hence Hospital Accreditation and Registration No. are non-updatable."
+					},
+					"response": [
+						{
+							"name": "Update Hospital Profile : Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"hosp_name\": \"Demo Hospital\",\r\n    \"hosp_accreditation_by\": \"NABH\",\r\n    \"hosp_registration_no\":\"Demo123\",\r\n    \"email\": \"demo.mail@hospital.com\",\r\n    \"country\": \"India\",\r\n    \"city\": \"Gurugram\",\r\n    \"beds_count\": \"200\",\r\n    \"phone\": \"999999999\",\r\n    \"address\": \"Some Address at Gurugram\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/hospital",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Sep 2021 14:12:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "336"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Hospital or Clinic profile is succesfully updated.\",\n    \"hospital_clinic\": {\n        \"phone\": 999999999,\n        \"email\": \"demo.mail@hospital.com\",\n        \"beds_count\": 200,\n        \"hosp_registration_no\": \"Demo123\",\n        \"city\": \"Gurugram\",\n        \"country\": \"India\",\n        \"address\": \"Some Address at Gurugram\",\n        \"hosp_accreditation_by\": \"NABH\",\n        \"hosp_name\": \"Demo Hospital\"\n    }\n}"
+						},
+						{
+							"name": "Update Hospital Profile: Failure",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"hosp_name\": \"Demo Hospital\",\r\n    \"hosp_accreditation_by\": \"NABH\",\r\n    \"hosp_registration_no\":\"Wrong_Num\",\r\n    \"email\": \"demo.mail@hospital.com\",\r\n    \"country\": \"India\",\r\n    \"city\": \"Gurugram\",\r\n    \"beds_count\": \"200\",\r\n    \"phone\": \"999999999\",\r\n    \"address\": \"Some Address at Gurugram\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/hospital",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital"
+									]
+								}
+							},
+							"status": "NOT FOUND",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Sep 2021 14:17:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No Hospital or Clinic found by the provided details.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Hospital: Delete Hospital/Centre/Clinic",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "9bb3f93060ea0ef1f7d54598",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_5f7a87bf4752",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hos_id\": \"543fc5e5-d7ab-4729-b695-bb42c9e0\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/hospital",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hospital"
+							]
+						},
+						"description": "Use the endpoint to remove or de-register a Hospital. Only one hospital can be removed at a time for a provide hospital_id. Once removed hospital details can not be recovered."
+					},
+					"response": [
+						{
+							"name": "Delete Hospital/Centre/Clinic: Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"hos_id\": \"54d1ac58-8b9c-492a-a0bb-eacde795\"\r\n}"
+								},
+								"url": {
+									"raw": "{{url}}/hospital",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Sep 2021 14:38:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Hospital record deleted successfully.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Hospital: Upload or Change Logo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "9bb3f93060ea0ef1f7d54598",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_5f7a87bf4752",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/HP/Google Drive/Work/RxDigital/Development/Testing/Hospital/default_clinic_logo.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/hospital/change/logo/cdf844cac9124adab5f0fff12a0ac068",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hospital",
+								"change",
+								"logo",
+								"cdf844cac9124adab5f0fff12a0ac068"
+							]
+						},
+						"description": "Use the endpoint to upload or change Brand Logo for Hospital/Clinic/Care Center. Logo can be used to personalize the hospital interface or user communication."
+					},
+					"response": [
+						{
+							"name": "Upload or Change Logo: Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "multipart/form-data",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/HP/Google Drive/Work/RxDigital/Development/Testing/Hospital/default_clinic_logo.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/hospital/change/logo/cdf844cac9124adab5f0c068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital",
+										"change",
+										"logo",
+										"cdf844cac9124adab5f0c068"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Sep 2021 14:42:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "74"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Image 'hosp_Logo_cdf844cac9124adab5f0c068.png' uploaded\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Hospital: Find NMC RMP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "9bb3f93060ea0ef1f7d54598",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_5f7a87bf4752",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\":\"prasoon\",\r\n    \"lastname\":\"pathak\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/hospital/find/nmc/rmp",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hospital",
+								"find",
+								"nmc",
+								"rmp"
+							]
+						},
+						"description": "Use the endpoint to search for National Medical Council database for Registered Medical Professional by name.\nDoctor registration requires a valid RMP Number associated with State Medical Council to be passed while registration."
+					},
+					"response": [
+						{
+							"name": "Find NMC RMP: Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\":\"steven\",\r\n    \"lastname\":\"strange\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/hospital/find/rmp",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital",
+										"find",
+										"rmp"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "276"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 13:37:20 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"RMP Details\": [\n        {\n            \"StateMedicalCouncil\": \"Madhya Pradesh Medical Council\",\n            \"RegistrationYear\": \"2006\",\n            \"University\": \"U.D.Ahilya\",\n            \"DoctorName\": \"Steven Strange\",\n            \"RMPNum\": \"MP-0000\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Find NMC RMP: Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\":\"steven\",\r\n    \"lastname\":\"strange\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/hospital/find/nmc/rmp",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital",
+										"find",
+										"nmc",
+										"rmp"
+									]
+								}
+							},
+							"status": "NOT FOUND",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "92"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 13:42:22 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No RMP(Registered Medical Professional) can be found by given details.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Hospital: Fetch Logo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "9bb3f93060ea0ef1f7d54598",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_5f7a87bf4752",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/hospital/logo/306e57b0-43ac-470c-ba55-c80480ae",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hospital",
+								"logo",
+								"306e57b0-43ac-470c-ba55-c80480ae"
+							]
+						},
+						"description": "Use the endpoint to get the brand logo of the hospital."
+					},
+					"response": []
+				},
+				{
+					"name": "Hospital: Register Doctor <str: hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "9bb3f93060ea0ef1f7d54598",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_5f7a87bf4752",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"steven.strange@hospital.com\",\r\n    \"phone\": \"7777777779\",\r\n    \"firstname\":\"Steven\",\r\n    \"lastname\": \"Strange\",\r\n    \"qualification\": \"MBBS\",\r\n    \"speciality\": \"Radiologist, Interventional Radiologist\",\r\n    \"rmp_reg_year\": \"2011\",\r\n    \"rmp_birth_year\": \"1988\",\r\n    \"rmp_degree_year\": \"2010\",\r\n    \"rmp_num\": \"77777\",\r\n    \"consult_charge\": \"500\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/hospital/doctor/306e57b0-43ac-470c-ba55-c80480ae",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hospital",
+								"doctor",
+								"306e57b0-43ac-470c-ba55-c80480ae"
+							]
+						},
+						"description": "Use the endpoint to register a Medical Practitioner with the Hospital. The request validate NMC RMP No. for the practitioner, hence a valid RMP number associated with the doctor is required for the registration."
+					},
+					"response": [
+						{
+							"name": "Register Doctor: Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"Steven.Strange@lifeline.com\",\r\n    \"phone\": \"7777777779\",\r\n    \"firstname\":\"Steven\",\r\n    \"lastname\": \"Strange\",\r\n    \"qualification\": \"MBBS\",\r\n    \"speciality\": \"Gynecologist , Obstetrician\",\r\n    \"rmp_reg_year\": \"1994\",\r\n    \"rmp_birth_year\": \"\",\r\n    \"rmp_degree_year\": \"1994\",\r\n    \"rmp_num\": \"7777\",\r\n    \"consult_charge\": \"500\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/hospital/doctor/cdf844cac94adab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital",
+										"doctor",
+										"cdf844cac94adab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Sep 2021 15:00:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Dr.Steven Strange, profile created succesfully.\"\n}"
+						},
+						{
+							"name": "Register Doctor: RMP Invalid",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"prasoon.pathak@hospital.com\",\r\n    \"phone\": \"8802997639\",\r\n    \"firstname\":\"prasoon\",\r\n    \"lastname\": \"pathak\",\r\n    \"qualification\": \"MBBS\",\r\n    \"speciality\": \"Radiologist, Interventional Radiologist\",\r\n    \"rmp_reg_year\": \"2006\",\r\n    \"rmp_birth_year\": \"1983\",\r\n    \"rmp_degree_year\": \"2006\",\r\n    \"rmp_num\": \"MP-805\",\r\n    \"consult_charge\": \"500\"\r\n}"
+								},
+								"url": {
+									"raw": "{{url}}/hospital/doctor/cdf844cac9124adab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital",
+										"doctor",
+										"cdf844cac9124adab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "129"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 14:07:56 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"NMC RMP No. provided for Dr.prasoon pathak is invalid. Please provide valid NMC RMP No. to register doctor.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Hospital: List Registered Doctor <str: hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "99ff82d55fd66a9c15c35f87",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_442238a98b22",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/hospital/doctor/108f5230-b331-4124-bd97-0954b23f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hospital",
+								"doctor",
+								"108f5230-b331-4124-bd97-0954b23f"
+							]
+						},
+						"description": "Use this endpoint to list the registered doctors with the hospital."
+					},
+					"response": []
+				},
+				{
+					"name": "Hospital: Remove Doctor <str: hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "9bb3f93060ea0ef1f7d54598",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_5f7a87bf4752",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"7777777779\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/hospital/doctor/306e57b0-43ac-470c-ba55-c80480ae",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hospital",
+								"doctor",
+								"306e57b0-43ac-470c-ba55-c80480ae"
+							]
+						},
+						"description": "Use the endpoint to delist/remove the doctor from Hospital/Clinic. Once removed doctor would no longer be able to log-in for the hospital."
+					},
+					"response": [
+						{
+							"name": "Remove Doctor: Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"phone\": \"7777777779\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/hospital/doctor/cac9124adab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital",
+										"doctor",
+										"cac9124adab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 04:42:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Dr.Steven Strange's profile removed succesfullly.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Hospital: List Holidays <str: hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "9bb3f93060ea0ef1f7d54598",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_5f7a87bf4752",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/hospital/holiday/306e57b0-43ac-470c-ba55-c80480ae",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hospital",
+								"holiday",
+								"306e57b0-43ac-470c-ba55-c80480ae"
+							]
+						},
+						"description": "Use the endpoint to list upcoming (future dates) hospital holidays."
+					},
+					"response": [
+						{
+							"name": "List Holidays: Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/hospital/holiday/4cac9124adab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital",
+										"holiday",
+										"4cac9124adab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 04:51:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"upcoming_holidays\": [\n        {\n            \"holi_date\": \"2021-09-19\"\n        },\n        {\n            \"holi_date\": \"2021-09-26\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Hospital: Create Holidays <str: hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "9bb3f93060ea0ef1f7d54598",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_5f7a87bf4752",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"holidays\": [\"2021-10-2\",\"2021-10-12\",\"2021-10-30\"]\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/hospital/holiday/306e57b0-43ac-470c-ba55-c80480ae",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hospital",
+								"holiday",
+								"306e57b0-43ac-470c-ba55-c80480ae"
+							]
+						},
+						"description": "Use the endpoint to declare the holiday for Hospital. Once holiday is declared for particular date, the hospital doctor's will be marked un-available for that date."
+					},
+					"response": [
+						{
+							"name": "Create Holidays: Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"holidays\": [\"2021-09-19\",\"2021-09-26\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/hospital/holiday/cac9124adab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital",
+										"holiday",
+										"cac9124adab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 04:47:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Hospital holidays updated successfully.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Hospital: Fetch all Appointments <str: hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "9bb3f93060ea0ef1f7d54598",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_5f7a87bf4752",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/hospital/appointments/306e57b0-43ac-470c-ba55-c80480ae",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hospital",
+								"appointments",
+								"306e57b0-43ac-470c-ba55-c80480ae"
+							]
+						},
+						"description": "Use the endpoint to fetch the details of all the appointments for the hospital."
+					},
+					"response": [
+						{
+							"name": "Fetch all Appointments: Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/hospital/appointments/cac9124adab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital",
+										"appointments",
+										"cac9124adab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1870"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 04:56:22 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"appointments\": [\n        {\n            \"appointment_id\": \"f029648c-7cb8-4bfc-3714899a\",\n            \"appointment_type\": \"online\",\n            \"appointment_date\": \"2021-09-11\",\n            \"time_alloted\": \"15.30\",\n            \"doctor\": \"Dr.XYZ\",\n            \"appointment_status\": \"confirmed\",\n            \"payment_type\": \"online\",\n            \"payment_status\": \"paid\"\n        },\n        {\n            \"appointment_id\": \"544be60b-6225-4bb1-bd2d3ba3\",\n            \"appointment_type\": \"online\",\n            \"appointment_date\": \"2021-09-13\",\n            \"time_alloted\": \"15.30\",\n            \"doctor\": \"Dr.DEF\",\n            \"appointment_status\": \"confirmed\",\n            \"payment_type\": \"online\",\n            \"payment_status\": \"paid\"\n        },\n        {\n            \"appointment_id\": \"2054cc75-f08d-4e9f-28f66568\",\n            \"appointment_type\": \"online\",\n            \"appointment_date\": \"2021-09-14\",\n            \"time_alloted\": \"10.30\",\n            \"doctor\": \"Dr.ABC\",\n            \"appointment_status\": \"not_confirmed\",\n            \"payment_type\": \"cash\",\n            \"payment_status\": \"refunded\"\n        },\n        {\n            \"appointment_id\": \"1c57c868-2617-4d57-8470-c939bfc1\",\n            \"appointment_type\": \"online\",\n            \"appointment_date\": \"2021-09-15\",\n            \"time_alloted\": \"14.30\",\n            \"doctor\": \"Dr.ABC\",\n            \"appointment_status\": \"not_confirmed\",\n            \"payment_type\": \"online\",\n            \"payment_status\": \"refunded\"\n        },\n        {\n            \"appointment_id\": \"259c8011-2097-49a3-b2b25790\",\n            \"appointment_type\": \"in_person\",\n            \"appointment_date\": \"2021-09-15\",\n            \"time_alloted\": \"11.30\",\n            \"doctor\": \"Dr.XYZ\",\n            \"appointment_status\": \"not_confirmed\",\n            \"payment_type\": \"cash\",\n            \"payment_status\": \"initiated\"\n        },\n        {\n            \"appointment_id\": \"9d13e746-3baa-40e6-9be4603b\",\n            \"appointment_type\": \"in_person\",\n            \"appointment_date\": \"2021-09-15\",\n            \"time_alloted\": \"10.30\",\n            \"doctor\": \"Dr.XYZ\",\n            \"appointment_status\": \"confirmed\",\n            \"payment_type\": \"cash\",\n            \"payment_status\": \"paid\"\n        },\n        {\n            \"appointment_id\": \"d522f912-ce59-44f0-8dd3-36d1180b\",\n            \"appointment_type\": \"in_person\",\n            \"appointment_date\": \"2021-09-15\",\n            \"time_alloted\": \"12.30\",\n            \"doctor\": \"Dr.DEF\",\n            \"appointment_status\": \"confirmed\",\n            \"payment_type\": \"cash\",\n            \"payment_status\": \"paid\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Hospital: Update Doctor's Availability <str: hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "9bb3f93060ea0ef1f7d54598",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_5f7a87bf4752",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"9998887777\",\r\n    \"is_available\": \"False\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/hospital/doctor/<str: hospital_id>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hospital",
+								"doctor",
+								"<str: hospital_id>"
+							]
+						},
+						"description": "Use the endpoint to update the Doctor's availability. Once doctor is made *is_available* : *False* , the Patient will not be able to book the appointment with the doctor."
+					},
+					"response": [
+						{
+							"name": "Hospital: Update Doctor's Availability",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"phone\": \"7777777779\",\r\n    \"is_available\": \"False\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/hospital/doctor/cac9124adab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"hospital",
+										"doctor",
+										"cac9124adab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:00:43 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Dr.Steven Strange, status is set to: 'Not Available'.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Hospital: Confirm Cash Payment <str: appointment_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "9bb3f93060ea0ef1f7d54598",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_5f7a87bf4752",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount_paid\":300,\r\n    \"currency\":\"INR\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/order/cash/payment/<str: appointment_id>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"order",
+								"cash",
+								"payment",
+								"<str: appointment_id>"
+							]
+						},
+						"description": "Use the endpoint to confirm the cash payment received. For In-Person appointments, patient has the option to make payment directly at the hospital."
+					},
+					"response": [
+						{
+							"name": "Confirm Cash Payment: Not In-Person: Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"amount_paid\":300,\r\n    \"currency\":\"INR\"\r\n}"
+								},
+								"url": {
+									"raw": "{{url}}/order/cash/payment/f029648c-7cb8-8635-3714899a",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"order",
+										"cash",
+										"payment",
+										"f029648c-7cb8-8635-3714899a"
+									]
+								}
+							},
+							"status": "NOT FOUND",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:06:40 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"This action is only valid for In-Person appointments.\"\n}"
+						},
+						{
+							"name": "Confirm Cash Payment: Past Date - Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"amount_paid\":300,\r\n    \"currency\":\"INR\"\r\n}"
+								},
+								"url": {
+									"raw": "{{url}}/order/cash/payment/259c8011-2097-49a3-911c-b2b25790",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"order",
+										"cash",
+										"payment",
+										"259c8011-2097-49a3-911c-b2b25790"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "124"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:19:18 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Appointment is in past date. Cash payment allowed only for current and future In-Person appointment booking.\"\n}"
+						},
+						{
+							"name": "Confirm Cash Payment: Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"amount_paid\":300,\r\n    \"currency\":\"INR\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/order/cash/payment/c0806f1e-2d32-ba16-adcc481d",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"order",
+										"cash",
+										"payment",
+										"c0806f1e-2d32-ba16-adcc481d"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:23:07 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Payment recieved, appointment is confirmed now.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Hospital: Cancel Appointment & Refund <str: appointment_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "9bb3f93060ea0ef1f7d54598",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rx_test_5f7a87bf4752",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"razorpay_payment_id\":\"\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/appointment/cancel/<str: appointment_id>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"appointment",
+								"cancel",
+								"<str: appointment_id>"
+							]
+						},
+						"description": "Use the endpoint to cancel the Online appointment and refund the paid amount."
+					},
+					"response": [
+						{
+							"name": "Confirmed Appointments Only - Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"razorpay_payment_id\":\"pay_HxGT3J4358wuaHsj\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/appointment/cancel/1c57c868-2617-4d57-8470-c939bfc123",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"appointment",
+										"cancel",
+										"1c57c868-2617-4d57-8470-c939bfc123"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/1.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 07:40:29 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"This action can be performed for confirmed appointments only.\"\n}"
+						}
+					]
+				}
+			],
+			"description": "<h2>Hospital</h2>\n\nHospital endpoints helps in setting up one or more virtual hospitals and manage doctor and patient appointments. You can use Hospital APIs in two modes - Live  and Test.\n\n<h4>Test Mode:</h4>\n\n1. You can register test hospital in Test Mode. Test Hospital registration do not requires any approval, and one can register a test hospital using user Dashboard or calling Hospital-Registration endpoint with Test API Key and Secret.\n\n2. Once hospital is registered, you can enlist test doctors, so they can access Doctor's portal.\n\n3. Once a doctor is registered s/he will be notified through contact details used in registration. Only after doctor successfully logged in to the Test -<b>Rx Digital - Doctor Portal</b> or through Test/Doctor endpoints, s/he will be marked available for appointments.\n\n4. Under Test Mode, test Patients can book appointments using either Test/Patient endpoints or using Test - <b>Rx Digital - Patient Portal</b>. The appointment checkout will not require any actual payments to be made.\n\n<h4>Live Mode:</h4>\n\n1. Each actual hospital registration goes through approval process. Once you have registered hospital either by calling Hospital-Registration endpoint or through user Dashboard, Rx Digital team will verify the shared details and approve the registration. The approval typically takes 1-2 Days.\n\n2. Only after approved registration a Hospital can enlist doctor's to its panel. only valid NMC registered professionals can be registered as doctors in the panel.\n\n3. Once a doctor is registered s/he will be notified through contact details used in registration. Only once doctor successfully logged in to the <b>Rx Digital - Doctor Portal</b>, s/he will be marked available for appointments.\n\n4. Patient can either use <b>Rx Digital - Patient Portal</b> to book appointments or they can use the interface build by you using Rx OPD APIs.\n\n5. For Online appointments/payments settlement usually happens in 7 working days.",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Patient",
+			"item": [
+				{
+					"name": "Patient: Generate OTP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"tests[\"PT Token Not Empty\"] = jsonData.pt_token !== undefined;\r",
+									"pm.environment.set(\"pt_token\", jsonData.pt_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"9971113297\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/patient/otp",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"otp"
+							]
+						},
+						"description": "Use the endpoint to authenticate patient. A patient can login using Phone No. and OTP. If patient is login for first time, s/he will be registered as new user, otherwise s/he would login to his earlier record."
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"tests[\"PT Token Not Empty\"] = jsonData.pt_token !== undefined;\r",
+									"pm.environment.set(\"pt_token\", jsonData.pt_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"9971113297\",\r\n    \"otp\": \"030640\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/patient/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"login"
+							]
+						},
+						"description": "Use the endpoint to authenticate patient. A patient can login using Phone No. and OTP. If patient is login for first time, s/he will be registered as new user, otherwise s/he would login to his earlier record."
+					},
+					"response": [
+						{
+							"name": "OTP Verification: Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"phone\": \"9000000000\",\r\n    \"otp\": \"833195\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/patient/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"patient",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "session=.eJyrVkrJT85MUbLKK83J0VEqyMjPS4VzSuJBMkpmaUnJSSbJKbqphoYmuiaGRqm6lkkmlrqWZiaJxpYmlkq1ACaFFQA.YULWjQ.jPLj-yDCB2X271OEgKOCWq_w0vI; HttpOnly; Path=/"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:30:53 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User OTP Verified Succesfully\"\n}"
+						},
+						{
+							"name": "OTP Verification: Failure",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"phone\": \"9000000000\",\r\n    \"otp\": \"833195\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/patient/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"patient",
+										"login"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:52:48 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User OTP verification failed\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Patient: Create/Update Patient Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"shruti.guru@rxdigital.io\",\r\n    \"name\": \"Shruti Guru\",\r\n    \"gender\":\"female\",\r\n    \"age\":36,\r\n    \"address\": \"\",\r\n    \"city\": \"\",\r\n    \"country\":\"\",\r\n    \"weight_kg\":64,\r\n    \"height_cm\":165,\r\n    \"blood_type\":\"A+\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/patient/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"profile"
+							]
+						},
+						"description": "Use this endpoint to create or update patient's profile. \n(Requires patient to be logged in using OTP.)"
+					},
+					"response": [
+						{
+							"name": "Profile Creation: Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"demo.user@gmail.com\",\r\n    \"name\": \"Demo User\",\r\n    \"gender\":\"female\",\r\n    \"age\":36,\r\n    \"address\": \"\",\r\n    \"city\": \"\",\r\n    \"country\":\"\",\r\n    \"weight_kg\":64,\r\n    \"height_cm\":165,\r\n    \"blood_type\":\"A+\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/patient/profile",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"patient",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "302"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "session=.eJyrVkrJT85MUbLKK83J0VEqyMjPS4VzSuJBMkpmaUnJSSbJKbqphoYmuiaGRqm6lkkmlrqWZiaJxpYmlkq1ACaFFQA.YULcPw.bTbdB1xVCc8OCjI3s2b8zD01rzg; HttpOnly; Path=/"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:55:11 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Updated Profile\": {\n        \"blood_type\": \"A+\",\n        \"name\": \"Demo User\",\n        \"gender\": \"female\",\n        \"country\": \"\",\n        \"height_cm\": 165,\n        \"address\": \"\",\n        \"city\": \"\",\n        \"age\": 36,\n        \"email\": \"demo.user@gmail.com\",\n        \"weight_kg\": 64\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Patient: Fetch Patient Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/test/patient/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"patient",
+								"profile"
+							]
+						},
+						"description": "Use this endpoint to create or update patient's profile. \n(Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Upload Medical Records",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							},
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "medical_record",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/patient/record",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"record"
+							]
+						},
+						"description": "Use the endpoint to upload medical records for the patient. A patient can upload single file in each endpoint request.\n(Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: List Available Doctors <str: hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/doctor/available/<str: hospital_id>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"available",
+								"<str: hospital_id>"
+							]
+						},
+						"description": "Use the endpoint to fetch list of all available doctors in Hospital for the appointment.\n(Requires patient to be logged in using OTP.)"
+					},
+					"response": [
+						{
+							"name": "List Available Doctors: Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/doctor/available/cac9124adab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"available",
+										"cac9124adab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "436"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:34:16 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Hospital\": \"ABC Hospital\",\n    \"Registered Doctors\": [\n        {\n            \"doc_id\": \"1bbc3a05-b928-45fa-b899-fb91b705\",\n            \"lastname\": \"Jain\",\n            \"rmp_num\": \"6060\",\n            \"qualification\": \"MBBS\",\n            \"firstname\": \"Shrikant\",\n            \"speciality\": \"Anesthesiologist , General Physician\"\n        },\n        {\n            \"doc_id\": \"d5facc84-7eb8-4bc7-a47e-729e49eb\",\n            \"lastname\": \"Jain\",\n            \"rmp_num\": \"12630\",\n            \"qualification\": \"MBBS\",\n            \"firstname\": \"Mansi\",\n            \"speciality\": \"Radiologist, Interventional Radiologist\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Patient: Fetch Doctor's Schedule <str: hospital_id>/<str: doctor_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/doctor/<str: hospital_id>/<str: doctor_id>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"<str: hospital_id>",
+								"<str: doctor_id>"
+							]
+						},
+						"description": "Use the endpoint to get the schedule of the doctor for booking the appointment.\n(Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Book Doctor's Appointment <str: hospital_id>/<str: doctor_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointment_date\":\"2021-09-25\",\r\n    \"time_alloted\":\"10.30\",\r\n    \"is_inperson\":\"False\",\r\n    \"pay_cash\":\"False\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/doctor/appointment/cdf844cac9124adab5f0fff12a0ac068/1bbc3a05-b928-45fa-b899-fb91b705",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"appointment",
+								"cdf844cac9124adab5f0fff12a0ac068",
+								"1bbc3a05-b928-45fa-b899-fb91b705"
+							]
+						},
+						"description": "Use the endpoint to make booking for the appointment with doctor.\n(Requires patient to be logged in using OTP.)"
+					},
+					"response": [
+						{
+							"name": "In-Person Appointment: Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"appointment_date\":\"2021-09-17\",\r\n    \"time_alloted\":\"14.30\",\r\n    \"is_inperson\":\"True\",\r\n    \"pay_cash\":\"True\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/doctor/appointment/cdf844cac9124adab5f0fff12a0ac068/1bbc3a05-b928-45fa-b899-fb91b705",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"appointment",
+										"cdf844cac9124adab5f0fff12a0ac068",
+										"1bbc3a05-b928-45fa-b899-fb91b705"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "153"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:22:44 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Appointment booked succesfully. Please proceed for payments to confirm appointment.\",\n    \"appointment_id\": \"c0806f1e-2d32-4ead-ba16-adcc481d\"\n}"
+						},
+						{
+							"name": "On-line Appointment: Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"appointment_date\":\"2021-09-18\",\r\n    \"time_alloted\":\"14.30\",\r\n    \"is_inperson\":\"False\",\r\n    \"pay_cash\":\"False\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/doctor/appointment/cdf844cac9124adabf12a0ac068/d5facc84-7eb8-a47e-729e49eb",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"appointment",
+										"cdf844cac9124adabf12a0ac068",
+										"d5facc84-7eb8-a47e-729e49eb"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "163"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:40:10 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Appointment booked succesfully. Please proceed for payments to confirm appointment.\",\n    \"appointment_id\": \"bc994738-51a8-8a6f-a94eba1e\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Patient: Fetch Upcoming Appointments (Confirmed)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/patient/appointments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"appointments"
+							]
+						},
+						"description": "Use the endpoint to fetch the confirmed (Paid) upcoming appointments for patient. (Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Portal: Fetch appointment order details <str: appointment_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/order/appointment/667d4969-4076-4abc-b9eb-a712fded",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"order",
+								"appointment",
+								"667d4969-4076-4abc-b9eb-a712fded"
+							]
+						},
+						"description": "Use the endpoint to fetch details of the Appointment Order for Initiated Appointment. Use the details to prepare Checkout, after successful payment, call verify appointment order payment endpoint(/order/online/payment/<str:appointment_id>) to confirm appointment."
+					},
+					"response": []
+				},
+				{
+					"name": "Portal: Verify Appointment Order Payment <str: appointment_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\t\r\n\t\"razorpay_payment_id\":\"pay_HwvYGPrvg3BGP9\",\r\n    \"razorpay_order_id\":\"order_HwvTgDEgE5Ph7M\",\r\n    \"razorpay_signature\":\"65ed40e27c02763edcaf63bc01a46ca7efe5a5ff4a2cb16a1bb88d5483f47365\",\r\n    \"razorpay_error_code\":\"\",\r\n    \"razorpay_error_description\":\"\",\r\n    \"razorpay_error_source\":\"\",\r\n    \"razorpay_error_step\":\"\",\r\n    \"razorpay_error_reason\":\"\",\r\n    \"razorpay_error_metadata_order_id\":\"\",\r\n    \"razorpay_error_metadata_payment_id\":\"\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/order/online/payment/<string:appointment_id>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"order",
+								"online",
+								"payment",
+								"<string:appointment_id>"
+							]
+						},
+						"description": "Logout the user and invalidate access token."
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/patient/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "<h2>Patient</h2>\n\nWith Patient endpoints one can create Patient facing interfaces for services like booking appointments, profile creation or update, medical records management and appointment order payments.\n\nPatient needs to authenticate using Phone No. and valid OTP to Login."
+		},
+		{
+			"name": "Doctor",
+			"item": [
+				{
+					"name": "Doctor: Generate OTP <str: hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"tests[\"PT Token Not Empty\"] = jsonData.pt_token !== undefined;\r",
+									"pm.environment.set(\"pt_token\", jsonData.pt_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"9899780088\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/doctor/otp/ae898d62-42a5-4c0d-8e45-458dbcec",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"otp",
+								"ae898d62-42a5-4c0d-8e45-458dbcec"
+							]
+						},
+						"description": "Use the endpoint to authenticate patient. A patient can login using Phone No. and OTP. If patient is login for first time, s/he will be registered as new user, otherwise s/he would login to his earlier record."
+					},
+					"response": []
+				},
+				{
+					"name": "Doctor: Login <str: hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"tests[\"Doc Token Not Empty\"] = jsonData.doc_token !== undefined;\r",
+									"pm.environment.set(\"doc_token\", jsonData.doc_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"9899780088\",\r\n    \"otp\": \"718214\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/doctor/login/ae898d62-42a5-4c0d-8e45-458dbcec",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"login",
+								"ae898d62-42a5-4c0d-8e45-458dbcec"
+							]
+						},
+						"description": "Use the endpoint to login using Phone No. and OTP. This endpoint requires unique hospital id to be passed as endpoint parameter. Only registered doctors will be able to login successfully using the endpoint."
+					},
+					"response": [
+						{
+							"name": "OTP Verification: Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"phone\": \"7777777779\",\r\n    \"otp\": \"673882\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/doctor/login/cdf844caadab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"login",
+										"cdf844caadab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "session=.eJwdy0EOQEAMBdC7dK2L4TNTl5Fpp0IywYKVuDuxfIt3U9ltLTRS6edslsDRNTHUImdE59iKQ1ypoWPZN6dxu2r9cE7_G2Y1hRX2EMAIrbMohGVA7gRCzwvWWByh.YUMRSQ.7xplZRanc8PgPLmQew3uodfAmaw; HttpOnly; Path=/"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 09:41:29 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OTP Verified Succesfully for Dr.Steven Strange\"\n}"
+						},
+						{
+							"name": "OTP Verification: Failure",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"phone\": \"7777777779\",\r\n    \"otp\": \"673882\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/doctor/login/cdf844cacadab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"login",
+										"cdf844cacadab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "session=.eJyrVkrJT85MUbLKK83J0VEqyMjPS4VzSuJBMkpmaUnJSSbJKbqphoYmuiaGRqm6lkkmlrqWZiaJxpYmlkq1ACaFFQA.YUMRiA.7VwNDPdoVcMqQexUAaKR9uzQKCk; HttpOnly; Path=/"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 09:42:32 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User OTP verification failed\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Doctor: Create Day Schedule <hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from_list\": [\"10\",\"14\"],\r\n    \"to_list\": [\"12\",\"18.30\"]\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/doctor/schedule/cdf844cac9124adab5f0fff12a0ac068",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"schedule",
+								"cdf844cac9124adab5f0fff12a0ac068"
+							]
+						},
+						"description": "Use the endpoint to create doctor's day schedule. This creates a running schedule for doctor, and it remains same for daily appointment  bookings, until doctor changes it."
+					},
+					"response": [
+						{
+							"name": "Create Day Schedule: Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"from_list\": [\"10.30\",\"12.00\"],\r\n    \"to_list\": [\"11.30\",\"14.00\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/doctor/schedule/cdf844cadab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"schedule",
+										"cdf844cadab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "256"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "session=.eJyrVkrJT85MUbLKK83J0VEqyMjPS4VzSuJBMkpmaUnJSSbJKbqphoYmuiaGRqm6lkkmlrqWZiaJxpYmlkq1ACaFFQA.YUMSdA.pTVUEARn3WeeZP_OJ9TKLGGsNoI; HttpOnly; Path=/"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 09:46:28 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Doctor's schedule updated sucessfully.\",\n    \"current_schedule\": [\n        {\n            \"from_time\": \"10.3\",\n            \"to_time\": \"11.3\"\n        },\n        {\n            \"from_time\": \"12\",\n            \"to_time\": \"14\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Doctor: Create Appointment Notes <appointment_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"symptoms_list\": [\"Cold\",\"Cough\",\"Fever\"],\r\n    \"findings_list\": [\"Raised Heartbeats\",\"High Fever\"],\r\n    \"recommendations_list\":[\"Administer Dengue Test\",\"Administer Covid-19 Test\", \"Paracetemol - 2 Times daily\"]\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/doctor/appointment/notes/e6fcb379-2d1d-443f-95c9-19419ac1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"appointment",
+								"notes",
+								"e6fcb379-2d1d-443f-95c9-19419ac1"
+							]
+						},
+						"description": "Use the endpoint to create or update Doctor's notes for Patient consultation. The same notes are used to generate doctor's prescription."
+					},
+					"response": [
+						{
+							"name": "Create Appointment Notes: Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"symptoms_list\": [\"Cold\",\"Cough\",\"Fever\"],\r\n    \"findings_list\": [\"Raised Heartbeats\",\"High Fever\"],\r\n    \"recommendations_list\":[\"Administer Dengue Test\",\"Administer Covid-19 Test\", \"Paracetemol - 2 Times daily\"]\r\n}"
+								},
+								"url": {
+									"raw": "{{url}}/doctor/appointment/notes/e6fcb379-2d1d-443f-95c9-19419ac1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"appointment",
+										"notes",
+										"e6fcb379-2d1d-443f-95c9-19419ac1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "77"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Sep 2021 12:09:25 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Doctor notes created succesfully for the patient appointment.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Doctor: Fetch Appointment Notes <appointment_id> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/doctor/appointment/notes/e6fcb379-2d1d-443f-95c9-19419ac1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"appointment",
+								"notes",
+								"e6fcb379-2d1d-443f-95c9-19419ac1"
+							]
+						},
+						"description": "Use the endpoint to fetch patient consultation notes by the doctor."
+					},
+					"response": [
+						{
+							"name": "Fetch Appointment Notes: Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/doctor/appointment/notes/e6fcb379-2d1d-443f-95c9-19419ac1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"appointment",
+										"notes",
+										"e6fcb379-2d1d-443f-95c9-19419ac1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "304"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Sep 2021 12:13:38 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"patient_symptoms\": \"{\\\"0\\\": \\\"Cold\\\", \\\"1\\\": \\\"Cough\\\", \\\"2\\\": \\\"Fever\\\"}\",\n    \"doc_findings\": \"{\\\"0\\\": \\\"Raised Heartbeats\\\", \\\"1\\\": \\\"High Fever\\\"}\",\n    \"doc_recommendations\": \"{\\\"0\\\": \\\"Administer Dengue Test\\\", \\\"1\\\": \\\"Administer Covid-19 Test\\\", \\\"2\\\": \\\"Paracetemol - 2 Times daily\\\"}\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Doctor: Fetch Patient Medical Records <appointment_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/appointment/patient/record/<str: appointment_id>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"appointment",
+								"patient",
+								"record",
+								"<str: appointment_id>"
+							]
+						},
+						"description": "Get the medical records to refer for an appointment. All the current files will be zipped to fetch the single file for the doctor."
+					},
+					"response": []
+				},
+				{
+					"name": "Doctor: Upload Avatar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							},
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/HP/Google Drive/Work/RxDigital/Development/Testing/Dr.Shrikant Jain.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/doctor/avatar/upload",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"avatar",
+								"upload"
+							]
+						},
+						"description": "Use the endpoint to upload Avatar or Profile picture for the doctor."
+					},
+					"response": []
+				},
+				{
+					"name": "Doctor: Get Avatar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/doctor/avatar",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"avatar"
+							]
+						},
+						"description": "Use the endpoint to fetch Avatar or Profile picture of the doctor."
+					},
+					"response": []
+				},
+				{
+					"name": "Doctor: Fetch Upcoming Appointments (Confirmed) <hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/doctor/appointments/cdf844cac9124adab5f0fff12a0ac068",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"appointments",
+								"cdf844cac9124adab5f0fff12a0ac068"
+							]
+						},
+						"description": "Use the endpoint to fetch the confirmed (Paid) upcoming appointments for doctor. \n(Requires doctor to be logged in using OTP.)"
+					},
+					"response": [
+						{
+							"name": "Fetch Upcoming Appointments (Confirmed): Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/doctor/appointments/cdf844cac9124adab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"appointments",
+										"cdf844cac9124adab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "238"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 14:39:49 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"appointments\": [\n        {\n            \"appointment_date\": \"2021-09-17\",\n            \"appointment_type\": \"in_person\",\n            \"time_alloted\": \"14.30\",\n            \"room_id\": \"b01328c9-af98-4069-b96f-67a44aa7\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Portal: Fetch Disease Terms by Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/diseases?name=append&limit=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"diseases"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "append"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "List disease terms by the name. Provide limit, to filter records by a value, by default limit applied is 100 records per query."
+					},
+					"response": []
+				},
+				{
+					"name": "Portal: Fetch Symptom Terms by Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"symptom\" : \"chest pain\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/symptoms?name=visceral&limit=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"symptoms"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "visceral"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "List symptoms by the name. Provide limit, to filter records by a value, by default limit applied is 100 records per query."
+					},
+					"response": []
+				},
+				{
+					"name": "Portal: Fetch Diagnosis Tests by Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/diagnosis?name=blood&limit=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"diagnosis"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "blood"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "List Diagnosis terms by the name. Provide limit, to filter records by a value, by default limit applied is 100 records per query."
+					},
+					"response": []
+				},
+				{
+					"name": "Portal: Fetch Therapies by Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/therapies?name=aminoglycoside&limit=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"therapies"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "aminoglycoside"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "List therapies by the name. Provide limit, to filter records by a value, by default limit applied is 100 records per query."
+					},
+					"response": []
+				},
+				{
+					"name": "Doctor: Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/doctor/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "<h2>Doctor</h2>\n\nWith Doctor endpoints one can create Doctor/Physician facing interfaces to provide services like managing daily schedule, patient records, upcoming consultation appointments and much more.\n\nDoctors needs to authenticate using Phone No. and valid OTP to Login through unique like provided by Hospital. Only registered doctor for a hospital would be able to login."
+		},
+		{
+			"name": "Test/Patient",
+			"item": [
+				{
+					"name": "Patient: Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"tests[\"PT Token Not Empty\"] = jsonData.pt_token !== undefined;\r",
+									"pm.environment.set(\"pt_token\", jsonData.pt_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"9313153497\",\r\n    \"otp\": \"731495\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/test/patient/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"patient",
+								"login"
+							]
+						},
+						"description": "Use the endpoint to authenticate patient. A patient can login using Phone No. and OTP. If patient is login for first time, s/he will be registered as new user, otherwise s/he would login to his earlier record."
+					},
+					"response": [
+						{
+							"name": "OTP Verification: Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"phone\": \"9000000000\",\r\n    \"otp\": \"833195\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/patient/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"patient",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "session=.eJyrVkrJT85MUbLKK83J0VEqyMjPS4VzSuJBMkpmaUnJSSbJKbqphoYmuiaGRqm6lkkmlrqWZiaJxpYmlkq1ACaFFQA.YULWjQ.jPLj-yDCB2X271OEgKOCWq_w0vI; HttpOnly; Path=/"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:30:53 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User OTP Verified Succesfully\"\n}"
+						},
+						{
+							"name": "OTP Verification: Failure",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"phone\": \"9000000000\",\r\n    \"otp\": \"833195\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/patient/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"patient",
+										"login"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:52:48 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User OTP verification failed\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Patient: Create/Update Patient Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"demo.patient@gmail.com\",\r\n    \"name\": \"Demo1 Patient\",\r\n    \"gender\":\"female\",\r\n    \"age\":36,\r\n    \"address\": \"\",\r\n    \"city\": \"\",\r\n    \"country\":\"\",\r\n    \"weight_kg\":64,\r\n    \"height_cm\":165,\r\n    \"blood_type\":\"A+\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/test/patient/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"patient",
+								"profile"
+							]
+						},
+						"description": "Use this endpoint to create or update patient's profile. \n(Requires patient to be logged in using OTP.)"
+					},
+					"response": [
+						{
+							"name": "Profile Creation: Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"demo.user@gmail.com\",\r\n    \"name\": \"Demo User\",\r\n    \"gender\":\"female\",\r\n    \"age\":36,\r\n    \"address\": \"\",\r\n    \"city\": \"\",\r\n    \"country\":\"\",\r\n    \"weight_kg\":64,\r\n    \"height_cm\":165,\r\n    \"blood_type\":\"A+\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/patient/profile",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"patient",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "302"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "session=.eJyrVkrJT85MUbLKK83J0VEqyMjPS4VzSuJBMkpmaUnJSSbJKbqphoYmuiaGRqm6lkkmlrqWZiaJxpYmlkq1ACaFFQA.YULcPw.bTbdB1xVCc8OCjI3s2b8zD01rzg; HttpOnly; Path=/"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:55:11 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Updated Profile\": {\n        \"blood_type\": \"A+\",\n        \"name\": \"Demo User\",\n        \"gender\": \"female\",\n        \"country\": \"\",\n        \"height_cm\": 165,\n        \"address\": \"\",\n        \"city\": \"\",\n        \"age\": 36,\n        \"email\": \"demo.user@gmail.com\",\n        \"weight_kg\": 64\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Patient: Fetch Patient Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/test/patient/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"patient",
+								"profile"
+							]
+						},
+						"description": "Use this endpoint to create or update patient's profile. \n(Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Upload Medical Records",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							},
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "medical_record",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/test/patient/record",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"patient",
+								"record"
+							]
+						},
+						"description": "Use the endpoint to upload medical records for the patient. A patient can upload single file in each endpoint request.\n(Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: List Available Doctors <str: hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/test/doctor/available/108f5230-b331-4124-bd97-0954b23f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"doctor",
+								"available",
+								"108f5230-b331-4124-bd97-0954b23f"
+							]
+						},
+						"description": "Use the endpoint to fetch list of all available doctors in Hospital for the appointment.\n(Requires patient to be logged in using OTP.)"
+					},
+					"response": [
+						{
+							"name": "List Available Doctors: Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/doctor/available/cac9124adab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"available",
+										"cac9124adab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "436"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:34:16 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Hospital\": \"ABC Hospital\",\n    \"Registered Doctors\": [\n        {\n            \"doc_id\": \"1bbc3a05-b928-45fa-b899-fb91b705\",\n            \"lastname\": \"Jain\",\n            \"rmp_num\": \"6060\",\n            \"qualification\": \"MBBS\",\n            \"firstname\": \"Shrikant\",\n            \"speciality\": \"Anesthesiologist , General Physician\"\n        },\n        {\n            \"doc_id\": \"d5facc84-7eb8-4bc7-a47e-729e49eb\",\n            \"lastname\": \"Jain\",\n            \"rmp_num\": \"12630\",\n            \"qualification\": \"MBBS\",\n            \"firstname\": \"Mansi\",\n            \"speciality\": \"Radiologist, Interventional Radiologist\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Patient: Fetch Doctor's Schedule <str: hospital_id>/<str: doctor_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/test/doctor/108f5230-b331-4124-bd97-0954b23f/b6b654e0-4ae9-4bc8-be1f-3bf1bee6",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"doctor",
+								"108f5230-b331-4124-bd97-0954b23f",
+								"b6b654e0-4ae9-4bc8-be1f-3bf1bee6"
+							]
+						},
+						"description": "Use the endpoint to get the schedule of the doctor for booking the appointment.\n(Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Book Doctor's Appointment <str: hospital_id>/<str: doctor_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointment_date\":\"2021-09-30\",\r\n    \"time_alloted\":\"10.30\",\r\n    \"is_inperson\":\"False\",\r\n    \"pay_cash\":\"False\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/test/doctor/appointment/306e57b0-43ac-470c-ba55-c80480ae/bdcbb0db-b2d4-4084-b523-cd5a357c",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"doctor",
+								"appointment",
+								"306e57b0-43ac-470c-ba55-c80480ae",
+								"bdcbb0db-b2d4-4084-b523-cd5a357c"
+							]
+						},
+						"description": "Use the endpoint to make booking for the appointment with doctor.\n(Requires patient to be logged in using OTP.)"
+					},
+					"response": [
+						{
+							"name": "In-Person Appointment: Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"appointment_date\":\"2021-09-17\",\r\n    \"time_alloted\":\"14.30\",\r\n    \"is_inperson\":\"True\",\r\n    \"pay_cash\":\"True\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/doctor/appointment/cdf844cac9124adab5f0fff12a0ac068/1bbc3a05-b928-45fa-b899-fb91b705",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"appointment",
+										"cdf844cac9124adab5f0fff12a0ac068",
+										"1bbc3a05-b928-45fa-b899-fb91b705"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "153"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:22:44 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Appointment booked succesfully. Please proceed for payments to confirm appointment.\",\n    \"appointment_id\": \"c0806f1e-2d32-4ead-ba16-adcc481d\"\n}"
+						},
+						{
+							"name": "On-line Appointment: Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"appointment_date\":\"2021-09-18\",\r\n    \"time_alloted\":\"14.30\",\r\n    \"is_inperson\":\"False\",\r\n    \"pay_cash\":\"False\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/doctor/appointment/cdf844cac9124adabf12a0ac068/d5facc84-7eb8-a47e-729e49eb",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"appointment",
+										"cdf844cac9124adabf12a0ac068",
+										"d5facc84-7eb8-a47e-729e49eb"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "163"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 05:40:10 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Appointment booked succesfully. Please proceed for payments to confirm appointment.\",\n    \"appointment_id\": \"bc994738-51a8-8a6f-a94eba1e\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Patient: Fetch Upcoming Appointments (Confirmed)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/test/patient/appointments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"patient",
+								"appointments"
+							]
+						},
+						"description": "Use the endpoint to fetch the confirmed (Paid) upcoming appointments for patient. (Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Portal: Fetch appointment order details <str: appointment_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/test/order/appointment/667d4969-4076-4abc-b9eb-a712fded",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"order",
+								"appointment",
+								"667d4969-4076-4abc-b9eb-a712fded"
+							]
+						},
+						"description": "Use the endpoint to fetch details of the Appointment Order for Initiated Appointment. Use the details to prepare Checkout, after successful payment, call verify appointment order payment endpoint(/order/online/payment/<str:appointment_id>) to confirm appointment."
+					},
+					"response": []
+				},
+				{
+					"name": "Portal: Verify Appointment Order Payment <str: appointment_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\t\r\n\t\"razorpay_payment_id\":\"pay_I2nfZ8ji7VFz4F\",\r\n    \"razorpay_order_id\":\"order_I2nRVrMaveH3LR\",\r\n    \"razorpay_signature\":\"81b5bcd0455ff29fe593a38f97e7c51521d4f41e3785ff756fb837ee2f7fafd4\",\r\n    \"razorpay_error_code\":\"\",\r\n    \"razorpay_error_description\":\"\",\r\n    \"razorpay_error_source\":\"\",\r\n    \"razorpay_error_step\":\"\",\r\n    \"razorpay_error_reason\":\"\",\r\n    \"razorpay_error_metadata_order_id\":\"\",\r\n    \"razorpay_error_metadata_payment_id\":\"\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/test/order/online/payment/667d4969-4076-4abc-b9eb-a712fded",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"order",
+								"online",
+								"payment",
+								"667d4969-4076-4abc-b9eb-a712fded"
+							]
+						},
+						"description": "Logout the user and invalidate access token."
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/test/patient/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"patient",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "<h2>Patient</h2>\n\nWith Patient endpoints one can create Patient facing interfaces for services like booking appointments, profile creation or update, medical records management and appointment order payments.\n\nPatient needs to authenticate using Phone No. and valid OTP to Login."
+		},
+		{
+			"name": "Test/Doctor",
+			"item": [
+				{
+					"name": "Doctor: Login <str: hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"tests[\"Doc Token Not Empty\"] = jsonData.doc_token !== undefined;\r",
+									"pm.environment.set(\"doc_token\", jsonData.doc_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"7777777779\",\r\n    \"otp\": \"558753\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/test/doctor/login/d1210e86-f0cf-44b9-8eec-eed4cc80",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"doctor",
+								"login",
+								"d1210e86-f0cf-44b9-8eec-eed4cc80"
+							]
+						},
+						"description": "Use the endpoint to login using Phone No. and OTP. This endpoint requires unique hospital id to be passed as endpoint parameter. Only registered doctors will be able to login successfully using the endpoint."
+					},
+					"response": [
+						{
+							"name": "OTP Verification: Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"phone\": \"7777777779\",\r\n    \"otp\": \"673882\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/doctor/login/cdf844caadab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"login",
+										"cdf844caadab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "session=.eJwdy0EOQEAMBdC7dK2L4TNTl5Fpp0IywYKVuDuxfIt3U9ltLTRS6edslsDRNTHUImdE59iKQ1ypoWPZN6dxu2r9cE7_G2Y1hRX2EMAIrbMohGVA7gRCzwvWWByh.YUMRSQ.7xplZRanc8PgPLmQew3uodfAmaw; HttpOnly; Path=/"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 09:41:29 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OTP Verified Succesfully for Dr.Steven Strange\"\n}"
+						},
+						{
+							"name": "OTP Verification: Failure",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"phone\": \"7777777779\",\r\n    \"otp\": \"673882\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/doctor/login/cdf844cacadab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"login",
+										"cdf844cacadab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "session=.eJyrVkrJT85MUbLKK83J0VEqyMjPS4VzSuJBMkpmaUnJSSbJKbqphoYmuiaGRqm6lkkmlrqWZiaJxpYmlkq1ACaFFQA.YUMRiA.7VwNDPdoVcMqQexUAaKR9uzQKCk; HttpOnly; Path=/"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 09:42:32 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User OTP verification failed\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Doctor: Upload Avatar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							},
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/HP/Google Drive/Work/RxDigital/Development/Testing/Dr.Shrikant Jain.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/test/doctor/avatar/upload",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"doctor",
+								"avatar",
+								"upload"
+							]
+						},
+						"description": "Use the endpoint to upload Avatar or Profile picture for the doctor."
+					},
+					"response": []
+				},
+				{
+					"name": "Doctor: Get Avatar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/test/doctor/avatar",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"doctor",
+								"avatar"
+							]
+						},
+						"description": "Use the endpoint to fetch Avatar or Profile picture of the doctor."
+					},
+					"response": []
+				},
+				{
+					"name": "Doctor: Create Day Schedule <hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from_list\": [\"10.30\",\"14\",\"17\"],\r\n    \"to_list\": [\"13\",\"16.30\",\"18.30\"]\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/test/doctor/schedule/306e57b0-43ac-470c-ba55-c80480ae",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"doctor",
+								"schedule",
+								"306e57b0-43ac-470c-ba55-c80480ae"
+							]
+						},
+						"description": "Use the endpoint to create doctor's day schedule. This creates a running schedule for doctor, and it remains same for daily appointment  bookings, until doctor changes it."
+					},
+					"response": [
+						{
+							"name": "Create Day Schedule: Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"from_list\": [\"10.30\",\"12.00\"],\r\n    \"to_list\": [\"11.30\",\"14.00\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/doctor/schedule/cdf844cadab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"schedule",
+										"cdf844cadab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "256"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "session=.eJyrVkrJT85MUbLKK83J0VEqyMjPS4VzSuJBMkpmaUnJSSbJKbqphoYmuiaGRqm6lkkmlrqWZiaJxpYmlkq1ACaFFQA.YUMSdA.pTVUEARn3WeeZP_OJ9TKLGGsNoI; HttpOnly; Path=/"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 09:46:28 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Doctor's schedule updated sucessfully.\",\n    \"current_schedule\": [\n        {\n            \"from_time\": \"10.3\",\n            \"to_time\": \"11.3\"\n        },\n        {\n            \"from_time\": \"12\",\n            \"to_time\": \"14\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Doctor: Create Appointment Notes <appointment_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"symptoms_list\": [\"Cold\",\"Cough\",\"Fever\"],\r\n    \"findings_list\": [\"Raised Heartbeats\",\"High Fever\"],\r\n    \"recommendations_list\":[\"Administer Dengue Test\",\"Administer Covid-19 Test\", \"Paracetemol - 2 Times daily\"]\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/test/doctor/appointment/notes/e6fcb379-2d1d-443f-95c9-19419ac1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"doctor",
+								"appointment",
+								"notes",
+								"e6fcb379-2d1d-443f-95c9-19419ac1"
+							]
+						},
+						"description": "Use the endpoint to create or update Doctor's notes for Patient consultation. The same notes are used to generate doctor's prescription."
+					},
+					"response": [
+						{
+							"name": "Create Appointment Notes: Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"symptoms_list\": [\"Cold\",\"Cough\",\"Fever\"],\r\n    \"findings_list\": [\"Raised Heartbeats\",\"High Fever\"],\r\n    \"recommendations_list\":[\"Administer Dengue Test\",\"Administer Covid-19 Test\", \"Paracetemol - 2 Times daily\"]\r\n}"
+								},
+								"url": {
+									"raw": "{{url}}/doctor/appointment/notes/e6fcb379-2d1d-443f-95c9-19419ac1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"appointment",
+										"notes",
+										"e6fcb379-2d1d-443f-95c9-19419ac1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "77"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Sep 2021 12:09:25 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Doctor notes created succesfully for the patient appointment.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Doctor: Fetch Appointment Notes <appointment_id> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/test/doctor/appointment/notes/e6fcb379-2d1d-443f-95c9-19419ac1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"doctor",
+								"appointment",
+								"notes",
+								"e6fcb379-2d1d-443f-95c9-19419ac1"
+							]
+						},
+						"description": "Use the endpoint to fetch patient consultation notes by the doctor."
+					},
+					"response": [
+						{
+							"name": "Fetch Appointment Notes: Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/doctor/appointment/notes/e6fcb379-2d1d-443f-95c9-19419ac1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"appointment",
+										"notes",
+										"e6fcb379-2d1d-443f-95c9-19419ac1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "304"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Sep 2021 12:13:38 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"patient_symptoms\": \"{\\\"0\\\": \\\"Cold\\\", \\\"1\\\": \\\"Cough\\\", \\\"2\\\": \\\"Fever\\\"}\",\n    \"doc_findings\": \"{\\\"0\\\": \\\"Raised Heartbeats\\\", \\\"1\\\": \\\"High Fever\\\"}\",\n    \"doc_recommendations\": \"{\\\"0\\\": \\\"Administer Dengue Test\\\", \\\"1\\\": \\\"Administer Covid-19 Test\\\", \\\"2\\\": \\\"Paracetemol - 2 Times daily\\\"}\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Doctor: Fetch Patient Medical Records <appointment_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/test/appointment/patient/record/<str: appointment_id>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"appointment",
+								"patient",
+								"record",
+								"<str: appointment_id>"
+							]
+						},
+						"description": "Get the medical records to refer for an appointment. All the current files will be zipped to fetch the single file for the doctor."
+					},
+					"response": []
+				},
+				{
+					"name": "Doctor: Fetch Upcoming Appointments (Confirmed) <hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/test/doctor/appointments/cdf844cac9124adab5f0fff12a0ac068",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"doctor",
+								"appointments",
+								"cdf844cac9124adab5f0fff12a0ac068"
+							]
+						},
+						"description": "Use the endpoint to fetch the confirmed (Paid) upcoming appointments for doctor. \n(Requires doctor to be logged in using OTP.)"
+					},
+					"response": [
+						{
+							"name": "Fetch Upcoming Appointments (Confirmed): Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/doctor/appointments/cdf844cac9124adab5f0fff12a0ac068",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"doctor",
+										"appointments",
+										"cdf844cac9124adab5f0fff12a0ac068"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "238"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.1 Python/3.8.10"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 14:39:49 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"appointments\": [\n        {\n            \"appointment_date\": \"2021-09-17\",\n            \"appointment_type\": \"in_person\",\n            \"time_alloted\": \"14.30\",\n            \"room_id\": \"b01328c9-af98-4069-b96f-67a44aa7\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Portal: Fetch Disease Terms by Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/diseases?name=append&limit=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"diseases"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "append"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portal: Fetch Symptom Terms by Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"symptom\" : \"chest pain\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/symptoms?name=visceral&limit=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"symptoms"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "visceral"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "List symptoms by the name. Provide limit, to filter records by a value, by default limit applied is 100 records per query."
+					},
+					"response": []
+				},
+				{
+					"name": "Portal: Fetch Diagnosis Tests by Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/diagnosis?name=blood&limit=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"diagnosis"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "blood"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "List Diagnosis terms by the name. Provide limit, to filter records by a value, by default limit applied is 100 records per query."
+					},
+					"response": []
+				},
+				{
+					"name": "Portal: Fetch Therapies by Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/therapies?name=aminoglycoside&limit=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"therapies"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "aminoglycoside"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "List therapies by the name. Provide limit, to filter records by a value, by default limit applied is 100 records per query."
+					},
+					"response": []
+				},
+				{
+					"name": "Doctor: Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/test/doctor/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"doctor",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "<h2>Doctor</h2>\n\nWith Doctor endpoints one can create Doctor/Physician facing interfaces to provide services like managing daily schedule, patient records, upcoming consultation appointments and much more.\n\nDoctors needs to authenticate using Phone No. and valid OTP to Login through unique like provided by Hospital. Only registered doctor for a hospital would be able to login."
+		},
+		{
+			"name": "Reporting",
+			"item": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
