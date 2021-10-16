@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "17026164-653d-4fca-8546-b2e0338310a2",
 		"name": "Rx Digital : Rx OPD Service",
-		"description": "<h1>API Reference Guide</h1>\n\n<b>RxDigital</b> APIs are completely RESTful and all our responses are returned in JSON.\n\nYou can use Rx Digital APIs in two modes, Test and Live. The API key is different for each mode. Know about <b>generating api keys</b>.\n\n<h2>API Authentication</h2>\nAll <b>RxDigital</b> APIs are authenticated using Basic Auth. Basic auth requires the following:\n\n * [YOUR_KEY_ID]\n * [YOUR_KEY_SECRET]\n\nBasic auth expects an Authorization header for each request in the Basic base64token format. Here, base64token is a base64 encoded string of YOUR_KEY_ID:YOUR_KEY_SECRET.\n\n<h4>Watch Out!</h4>\nThe Authorization header value should strictly adhere to the format mentioned above. Invalid formats will result in authentication failures.\n\n<h2>Generate API Keys</h2>\n\n1. Log into your Dashboard with appropriate credentials.\n2. Select the mode (Test or Live) for which you want to generate the API key.\n3. Navigate to Settings → API Keys → Generate Key to generate key for the selected mode.",
+		"description": "<h1>API Reference Guide</h1>\n\n<b>RxDigital</b> APIs are completely RESTful and all our responses are returned in JSON.\n\nYou can use Rx Digital APIs in two modes, Test and Live. The API key is different for each mode. Know about <b>generating api keys</b>.\n\n<h2>API Collection</h2>\n\nAPI Collection can be downloaded from Github using following link:\n\n[Collection - Rx OPD](https://github.com/rx-digital-labs/RAAS_Collections/blob/3cd93ce7d5d36023ee60db76249f56d870823706/Rx%20OPD/Rx%20Digital%20-%20Rx%20OPD.postman_collection)\n\n<h2>API Authentication</h2>\nAll <b>RxDigital</b> APIs are authenticated using Basic Auth. Basic auth requires the following:\n\n * [YOUR_KEY_ID]\n * [YOUR_KEY_SECRET]\n\n<h4>Watch Out!</h4>\n\nThe Authorization header value should strictly adhere to the format mentioned above. Invalid formats will result in authentication failures.\n\n<h2>Generate API Keys</h2>\n\n1. Log into your Rx Digital Dashboard with appropriate credentials.\n2. Select the mode (Test or Live) for which you want to generate the API key.\n3. Navigate to Settings → API Keys → Generate Key to generate key for the selected mode.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -2358,7 +2358,7 @@
 								"otp"
 							]
 						},
-						"description": "Use the endpoint to authenticate patient. A patient can login using Phone No. and OTP. If patient is login for first time, s/he will be registered as new user, otherwise s/he would login to his earlier record."
+						"description": "Use the endpoint to generate TOTP for user. User needs to provide valid phone no., so s/he can receive OTP SMS on shared Phone No. OTP is timed and generated for 2 Mins."
 					},
 					"response": []
 				},
@@ -3250,7 +3250,7 @@
 								"ae898d62-42a5-4c0d-8e45-458dbcec"
 							]
 						},
-						"description": "Use the endpoint to authenticate patient. A patient can login using Phone No. and OTP. If patient is login for first time, s/he will be registered as new user, otherwise s/he would login to his earlier record."
+						"description": "Use the endpoint to generate TOTP for Doctor. Doctor needs to provide the registered phone no., so s/he can receive OTP SMS on the Phone No. OTP is timed and generated for 2 Mins."
 					},
 					"response": []
 				},
