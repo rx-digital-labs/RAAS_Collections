@@ -2734,16 +2734,104 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/patient/record",
+							"raw": "{{url}}/patient/records",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"patient",
-								"record"
+								"records"
 							]
 						},
 						"description": "Use the endpoint to upload medical records for the patient. A patient can upload single file in each endpoint request.\n(Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: List Medical Records",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/patient/records",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"records"
+							]
+						},
+						"description": "Use the endpoint to fetch the list of medical records for the patient.\n(Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Get Medical Record <str: filename> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/patient/get/record/<str: filename>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"get",
+								"record",
+								"<str: filename>"
+							]
+						},
+						"description": "Use the endpoint to fetch specific medical records for the patient.\n(Requires patient to be logged in using OTP.)"
 					},
 					"response": []
 				},
@@ -3098,6 +3186,94 @@
 							]
 						},
 						"description": "Use the endpoint to fetch the confirmed (Paid) upcoming appointments for patient. (Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Cancel Appointment & Request Refund <str: appointment_id> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/patient/appointment/cancel/<aappointment_id>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"appointment",
+								"cancel",
+								"<aappointment_id>"
+							]
+						},
+						"description": "Use the endpoint to cancel the Online appointment and make full refund to the paid amount by customer. Only current and future appointments can be cancelled by customer."
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Fetch Payment Receipts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/patient/appointments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"appointments"
+							]
+						},
+						"description": "Use the endpoint to fetch the receipts for the Paid or Refunded appointment orders.(Requires patient to be logged in using OTP.)"
 					},
 					"response": []
 				},
@@ -3989,6 +4165,50 @@
 					]
 				},
 				{
+					"name": "Doctor: Fetch Billing Details <str: hospital_id> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/doctor/billing/<str: hospital_id>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"billing",
+								"<str: hospital_id>"
+							]
+						},
+						"description": "Use the endpoint to fetch date-wise billing details for the doctor."
+					},
+					"response": []
+				},
+				{
 					"name": "Portal: Fetch Disease Terms by Name",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -4566,22 +4786,112 @@
 								{
 									"key": "medical_record",
 									"type": "file",
-									"src": []
+									"src": "/C:/Users/HP/Google Drive/Work/RxDigital/Development/Testing/TestReport.pdf"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{url}}/test/patient/record",
+							"raw": "{{url}}/test/patient/records",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"test",
 								"patient",
-								"record"
+								"records"
 							]
 						},
 						"description": "Use the endpoint to upload medical records for the patient. A patient can upload single file in each endpoint request.\n(Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: List Medical Records",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/test/patient/records",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"patient",
+								"records"
+							]
+						},
+						"description": "Use the endpoint to fetch the list of medical records for the patient.\n(Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Get Medical Record <str: filename>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/test/patient/get/record/<str: filename>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"patient",
+								"get",
+								"record",
+								"<str: filename>"
+							]
+						},
+						"description": "Use the endpoint to fetch specific medical records for the patient.\n(Requires patient to be logged in using OTP.)"
 					},
 					"response": []
 				},
@@ -4742,10 +5052,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"appointment_date\":\"2021-09-30\",\r\n    \"time_alloted\":\"10.30\",\r\n    \"is_inperson\":\"False\",\r\n    \"pay_cash\":\"False\"\r\n}"
+							"raw": "{\r\n    \"appointment_date\":\"2021-10-17\",\r\n    \"time_alloted\":\"07.00\",\r\n    \"is_inperson\":\"False\",\r\n    \"pay_cash\":\"False\"\r\n}"
 						},
 						"url": {
-							"raw": "{{url}}/test/doctor/appointment/306e57b0-43ac-470c-ba55-c80480ae/bdcbb0db-b2d4-4084-b523-cd5a357c",
+							"raw": "{{url}}/test/doctor/appointment/108f5230-b331-4124-bd97-0954b23f/6e454986-f04d-4317-a484-0d3367b7",
 							"host": [
 								"{{url}}"
 							],
@@ -4753,8 +5063,8 @@
 								"test",
 								"doctor",
 								"appointment",
-								"306e57b0-43ac-470c-ba55-c80480ae",
-								"bdcbb0db-b2d4-4084-b523-cd5a357c"
+								"108f5230-b331-4124-bd97-0954b23f",
+								"6e454986-f04d-4317-a484-0d3367b7"
 							]
 						},
 						"description": "Use the endpoint to make booking for the appointment with doctor.\n(Requires patient to be logged in using OTP.)"
@@ -4935,6 +5245,96 @@
 							]
 						},
 						"description": "Use the endpoint to fetch the confirmed (Paid) upcoming appointments for patient. (Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Cancel Appointment & Request Refund <str: appointment_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/test/patient/appointment/cancel/df45d465-6867-4d62-9194-10840346",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"patient",
+								"appointment",
+								"cancel",
+								"df45d465-6867-4d62-9194-10840346"
+							]
+						},
+						"description": "Use the endpoint to cancel the Online appointment and make full refund to the paid amount by customer. Only current and future appointments can be cancelled by customer."
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Fetch Payment Receipts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/test/patient/appointments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"patient",
+								"appointments"
+							]
+						},
+						"description": "Use the endpoint to fetch the receipts for the Paid or Refunded appointment orders.(Requires patient to be logged in using OTP.)"
 					},
 					"response": []
 				},
@@ -5814,6 +6214,51 @@
 							"body": "{\n    \"appointments\": [\n        {\n            \"appointment_date\": \"2021-09-17\",\n            \"appointment_type\": \"in_person\",\n            \"time_alloted\": \"14.30\",\n            \"room_id\": \"b01328c9-af98-4069-b96f-67a44aa7\"\n        }\n    ]\n}"
 						}
 					]
+				},
+				{
+					"name": "Doctor: Fetch Billing Details <str: hospital_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/test/doctor/billing/d1210e86-f0cf-44b9-8eec-eed4cc80",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"doctor",
+								"billing",
+								"d1210e86-f0cf-44b9-8eec-eed4cc80"
+							]
+						},
+						"description": "Use the endpoint to fetch date-wise billing details for the doctor."
+					},
+					"response": []
 				},
 				{
 					"name": "Portal: Fetch Disease Terms by Name",
