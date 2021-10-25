@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "17026164-653d-4fca-8546-b2e0338310a2",
 		"name": "Rx Digital : Rx OPD Service",
-		"description": "<h1>API Reference Guide</h1>\n\n<b>RxDigital</b> APIs are completely RESTful and all our responses are returned in JSON.\n\nYou can use Rx Digital APIs in two modes, Test and Live. The API key is different for each mode. Know about <b>generating api keys</b>.\n\n<h2>API Collection</h2>\n\nAPI Collection can be downloaded from Github using following link:\n\n[Collection - Rx OPD](https://github.com/rx-digital-labs/RAAS_Collections/blob/3cd93ce7d5d36023ee60db76249f56d870823706/Rx%20OPD/Rx%20Digital%20-%20Rx%20OPD.postman_collection)\n\n<h2>API Authentication</h2>\nAll <b>RxDigital</b> APIs are authenticated using Basic Auth. Basic auth requires the following:\n\n * [YOUR_KEY_ID]\n * [YOUR_KEY_SECRET]\n\n<h4>Watch Out!</h4>\n\nThe Authorization header value should strictly adhere to the format mentioned above. Invalid formats will result in authentication failures.\n\n<h2>Generate API Keys</h2>\n\n1. Log into your Rx Digital Dashboard with appropriate credentials.\n2. Select the mode (Test or Live) for which you want to generate the API key.\n3. Navigate to Settings → API Keys → Generate Key to generate key for the selected mode.",
+		"description": "<h1>API Reference Guide</h1>\n\n<b>RxDigital</b> APIs are completely RESTful and all our responses are returned in JSON.\n\nYou can use Rx Digital APIs in two modes, Test and Live. The API key is different for each mode. Know about <b>generating api keys</b>.\n\n<h2>API Collection</h2>\n\nAPI Collection can be downloaded from Github using following link:\n\n[Collection - Rx OPD](https://github.com/rx-digital-labs/RAAS_Collections/find/master)\n\n<h2>API Authentication</h2>\nAll <b>RxDigital</b> APIs are authenticated using Basic Auth. Basic auth requires the following:\n\n * [YOUR_KEY_ID]\n * [YOUR_KEY_SECRET]\n\n<h4>Watch Out!</h4>\n\nThe Authorization header value should strictly adhere to the format mentioned above. Invalid formats will result in authentication failures.\n\n<h2>Generate API Keys</h2>\n\n1. Log into your Rx Digital Dashboard with appropriate credentials.\n2. Select the mode (Test or Live) for which you want to generate the API key.\n3. Navigate to Settings → API Keys → Generate Key to generate key for the selected mode.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -2388,7 +2388,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"phone\": \"9971113297\",\r\n    \"otp\": \"030640\"\r\n}"
+							"raw": "{\r\n    \"phone\": \"9971111111\",\r\n    \"otp\": \"030640\"\r\n}"
 						},
 						"url": {
 							"raw": "{{url}}/patient/login",
@@ -2566,7 +2566,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"shruti.guru@rxdigital.io\",\r\n    \"name\": \"Shruti Guru\",\r\n    \"gender\":\"female\",\r\n    \"age\":36,\r\n    \"address\": \"\",\r\n    \"city\": \"\",\r\n    \"country\":\"\",\r\n    \"weight_kg\":64,\r\n    \"height_cm\":165,\r\n    \"blood_type\":\"A+\"\r\n}"
+							"raw": "{\r\n    \"email\": \"demo.patient@rxdigital.io\",\r\n    \"name\": \"Demo Patient\",\r\n    \"gender\":\"female\",\r\n    \"age\":36,\r\n    \"address\": \"\",\r\n    \"city\": \"\",\r\n    \"country\":\"\",\r\n    \"weight_kg\":64,\r\n    \"height_cm\":165,\r\n    \"blood_type\":\"A+\"\r\n}"
 						},
 						"url": {
 							"raw": "{{url}}/patient/profile",
@@ -3264,16 +3264,60 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/patient/appointments",
+							"raw": "{{url}}/patient/receipts",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"patient",
-								"appointments"
+								"receipts"
 							]
 						},
 						"description": "Use the endpoint to fetch the receipts for the Paid or Refunded appointment orders.(Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Fetch Doctor's Prescription <str: appointment_id> Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/patient/prescription/<appointment_id>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"prescription",
+								"<appointment_id>"
+							]
+						},
+						"description": "Use the endpoint to fetch Doctor's notes or Prescription for the patient."
 					},
 					"response": []
 				},
@@ -4622,7 +4666,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"demo.patient@gmail.com\",\r\n    \"name\": \"Demo1 Patient\",\r\n    \"gender\":\"female\",\r\n    \"age\":36,\r\n    \"address\": \"\",\r\n    \"city\": \"\",\r\n    \"country\":\"\",\r\n    \"weight_kg\":64,\r\n    \"height_cm\":165,\r\n    \"blood_type\":\"A+\"\r\n}"
+							"raw": "{\r\n    \"email\": \"demo.patient@gmail.com\",\r\n    \"name\": \"Demo Patient\",\r\n    \"gender\":\"female\",\r\n    \"age\":36,\r\n    \"address\": \"\",\r\n    \"city\": \"\",\r\n    \"country\":\"\",\r\n    \"weight_kg\":64,\r\n    \"height_cm\":165,\r\n    \"blood_type\":\"A+\"\r\n}"
 						},
 						"url": {
 							"raw": "{{url}}/test/patient/profile",
@@ -5324,17 +5368,62 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/test/patient/appointments",
+							"raw": "{{url}}/test/patient/receipts",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"test",
 								"patient",
-								"appointments"
+								"receipts"
 							]
 						},
 						"description": "Use the endpoint to fetch the receipts for the Paid or Refunded appointment orders.(Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Fetch Doctor's Prescription <str: appointment_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/test/patient/prescription/<appointment_id>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"patient",
+								"prescription",
+								"<appointment_id>"
+							]
+						},
+						"description": "Use the endpoint to fetch Doctor's notes or Prescription for the patient."
 					},
 					"response": []
 				},
