@@ -2836,6 +2836,44 @@
 					"response": []
 				},
 				{
+					"name": "Patient: Remove Medical Record <str: filename>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/patient/del/record/<str: filename>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"del",
+								"record",
+								"<str: filename>"
+							]
+						},
+						"description": "Use the endpoint to remove specific medical records for the patient.\n(Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
 					"name": "Patient: List Available Doctors <str: hospital_id>",
 					"event": [
 						{
@@ -4091,7 +4129,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "doc_token",
+								"value": "{{doc_token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
@@ -4798,17 +4842,6 @@
 				},
 				{
 					"name": "Patient: Upload Medical Records",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -4830,7 +4863,7 @@
 								{
 									"key": "medical_record",
 									"type": "file",
-									"src": "/C:/Users/HP/Google Drive/Work/RxDigital/Development/Testing/TestReport.pdf"
+									"src": "/C:/Users/HP/Google Drive/Work/RxDigital/Development/Testing/hyd-COVID-test-result.jpg"
 								}
 							]
 						},
@@ -4862,9 +4895,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [
@@ -4874,10 +4904,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
 						"url": {
 							"raw": "{{url}}/test/patient/records",
 							"host": [
@@ -4936,6 +4962,45 @@
 							]
 						},
 						"description": "Use the endpoint to fetch specific medical records for the patient.\n(Requires patient to be logged in using OTP.)"
+					},
+					"response": []
+				},
+				{
+					"name": "Patient: Remove Medical Record <str: filename>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "pt_token",
+								"value": "{{pt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/test/patient/del/record/testlabreport_10302021124148.jpg",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"test",
+								"patient",
+								"del",
+								"record",
+								"testlabreport_10302021124148.jpg"
+							]
+						},
+						"description": "Use the endpoint to remove specific medical records for the patient.\n(Requires patient to be logged in using OTP.)"
 					},
 					"response": []
 				},
